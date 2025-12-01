@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block title %}Health Trends{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">📈 Health Visualization & Trends</h2>
+    <p class="text-muted">Apne health metrics ko waqt ke saath dekhein.</p>
+
+    <div class="mb-4">
+        <label class="form-label">Time Filter:</label>
+        <a href="{{ url_for('trends', filter='daily') }}" class="btn {% if current_filter == 'daily' %}btn-primary{% else %}btn-outline-primary{% endif %} me-2">Daily</a>
+        <a href="{{ url_for('trends', filter='weekly') }}" class="btn {% if current_filter == 'weekly' %}btn-primary{% else %}btn-outline-primary{% endif %} me-2">Weekly</a>
+        <a href="{{ url_for('trends', filter='monthly') }}" class="btn {% if current_filter == 'monthly' %}btn-primary{% else %}btn-outline-primary{% endif %}">Monthly</a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">Weight Trend</div>
+                <div class="card-body text-center">
+                    {% if weight_plot %}
+                        <img src="data:image/png;base64,{{ weight_plot }}" alt="Weight Trend Chart" class="img-fluid">
+                    {% else %}
+                        <p>Weight data available nahi hai ya graph banane mein masla hua.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">Blood Pressure Trend (Systolic)</div>
+                <div class="card-body text-center">
+                    {% if bp_plot %}
+                        <img src="data:image/png;base64,{{ bp_plot }}" alt="BP Trend Chart" class="img-fluid">
+                    {% else %}
+                        <p>Blood Pressure data available nahi hai.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header bg-warning text-dark">Sugar Level Trend</div>
+                <div class="card-body text-center">
+                    {% if sugar_plot %}
+                        <img src="data:image/png;base64,{{ sugar_plot }}" alt="Sugar Trend Chart" class="img-fluid">
+                    {% else %}
+                        <p>Sugar Level data available nahi hai.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="text-center">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary mt-3">Go to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

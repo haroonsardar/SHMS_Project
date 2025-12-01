@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<style>
+    .auth-card {
+        background-color: #FFFFFF;
+        border: 1px solid #E0E4E7;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        padding: 40px;
+    }
+    .auth-header {
+        color: #EF476F; /* Muted Red/Pink */
+        font-weight: 700;
+        margin-bottom: 30px;
+    }
+    .form-control {
+        border-radius: 8px;
+        height: 45px;
+        background-color: #F8F9FA;
+    }
+    .btn-signup {
+        background-color: #118AB2; /* Muted Blue */
+        border-color: #118AB2;
+        font-weight: 600;
+        height: 45px;
+        border-radius: 8px;
+    }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="auth-card">
+            <h2 class="auth-header text-center">✍️ Create Your SHMS Account</h2>
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="example@email.com" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="username" class="form-label">Full Name / Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Haroon Khan" required>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="password" class="form-label">Set Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="********" required>
+                </div>
+                
+                <button type="submit" class="btn btn-signup w-100">Sign Up</button>
+            </form>
+            
+            <div class="mt-4 text-center">
+                <p class="text-muted mb-0">Already have an account?</p>
+                <a href="{{ url_for('login') }}" class="text-decoration-none" style="color:#06D6A0; font-weight: 600;">Sign In</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

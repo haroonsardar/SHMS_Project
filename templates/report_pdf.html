@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Health Monitoring Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; font-size: 10pt; }
+        h1 { color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 5px; }
+        h2 { color: #333; margin-top: 20px; border-bottom: 1px solid #ccc; }
+        .header-info { margin-bottom: 20px; background-color: #f4f4f4; padding: 10px; border-radius: 5px; }
+        .risk-box { padding: 15px; border: 1px solid; margin-bottom: 15px; }
+        .risk-high { background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+        .risk-medium { background-color: #fff3cd; border-color: #ffeeba; color: #856404; }
+        .risk-low { background-color: #d4edda; border-color: #c3e6cb; color: #155724; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+
+    <h1>Smart Health Monitoring System - Health Report</h1>
+
+    <div class="header-info">
+        <p><strong>User:</strong> {{ username }}</p>
+        <p><strong>Report Date:</strong> {{ current_date }}</p>
+        <p>This report summarizes the user's latest health data and calculated risk analysis.</p>
+    </div>
+
+    <h2>1. Latest Risk Analysis & Alerts</h2>
+    {% if risk_result %}
+    <div class="risk-box risk-{{ risk_result.risk | lower }}">
+        <h3>{{ risk_result.message }}</h3>
+        <p><strong>Risk Details:</strong></p>
+        <ul>
+            {% for detail in risk_result.details %}
+            <li>{{ detail }}</li>
+            {% endfor %}
+        </ul>
+        <p><strong>Recommendations:</strong></p>
+        <ul>
+            {% for rec in risk_result.recommendations %}
+            <li>{{ rec }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+    <p>Risk analysis data not available for this report.</p>
+    {% endif %}
+
+
+    <h2>2. Detailed Health Records (Last {{ records | length }} Entries)</h2>
+    {% if records %}
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Weight (kg)</th>
+                <th>BP (Sys/Dia)</th>
+                <th>Sugar (mg/dL)</th>
+                <th>Sleep (hrs)</th>
+                <th>Exercise (min)</th>
+                <th>Stress (1-10)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <td>{{ record.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td>{{ record.weight }}</td>
+                <td>{{ record.systolic_bp }}/{{ record.diastolic_bp }}</td>
+                <td>{{ record.sugar_level }}</td>
+                <td>{{ record.sleep_hours }}</td>
+                <td>{{ record.exercise_minutes }}</td>
+                <td>{{ record.stress_level }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No detailed records found.</p>
+    {% endif %}
+
+</body>
+</html>

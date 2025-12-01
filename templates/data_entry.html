@@ -1,0 +1,238 @@
+{% extends "layout.html" %}
+
+{% block title %}Add Health Record{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <!-- Header Section -->
+        <div class="text-center mb-5">
+            <div class="mb-3">
+                <i class="bi bi-clipboard2-pulse-fill" style="font-size: 4rem; color: var(--primary-blue);"></i>
+            </div>
+            <h2 class="fw-bold mb-2 text-white">Health Data Entry</h2>
+            <p class="text-white-50">
+                Welcome, <strong>{{ username }}</strong>. Please enter your latest health metrics below.
+            </p>
+        </div>
+
+        <!-- Main Form Card -->
+        <div class="card dashboard-card">
+            <div class="card-header header-data">
+                <h4 class="mb-0">
+                    <i class="bi bi-heart-pulse me-2"></i>
+                    Record Your Health Metrics
+                </h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" action="{{ url_for('add_record') }}" class="needs-validation" novalidate>
+                    
+                    <!-- Vital Signs Section -->
+                    <section class="mb-5">
+                        <h5 class="mb-3 pb-2 border-bottom">
+                            <i class="bi bi-activity me-2 text-primary"></i>
+                            Vital Signs
+                        </h5>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label for="weight" class="form-label fw-bold">
+                                    <i class="bi bi-speedometer2 me-1"></i>
+                                    Weight (kg)
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-calculator"></i>
+                                    </span>
+                                    <input type="number" step="0.1" class="form-control form-control-lg" 
+                                           id="weight" name="weight" placeholder="e.g., 70.5" required>
+                                    <span class="input-group-text">kg</span>
+                                </div>
+                                <small class="text-muted">
+                                    <i class="bi bi-info-circle me-1"></i>
+                                    Enter your current body weight
+                                </small>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="sugar_level" class="form-label fw-bold">
+                                    <i class="bi bi-droplet-half me-1"></i>
+                                    Blood Sugar Level (mg/dL)
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-graph-up"></i>
+                                    </span>
+                                    <input type="number" step="0.1" class="form-control form-control-lg" 
+                                           id="sugar_level" name="sugar_level" placeholder="e.g., 95" required>
+                                    <span class="input-group-text">mg/dL</span>
+                                </div>
+                                <small class="text-muted">
+                                    <i class="bi bi-info-circle me-1"></i>
+                                    Normal fasting: 70-100 mg/dL
+                                </small>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Blood Pressure Section -->
+                    <section class="mb-5">
+                        <h5 class="mb-3 pb-2 border-bottom">
+                            <i class="bi bi-heart-fill me-2 text-danger"></i>
+                            Blood Pressure
+                        </h5>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label for="systolic_bp" class="form-label fw-bold">
+                                    <i class="bi bi-arrow-up-circle me-1"></i>
+                                    Systolic (Upper Reading)
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-heart-pulse"></i>
+                                    </span>
+                                    <input type="number" step="0.1" class="form-control form-control-lg" 
+                                           id="systolic_bp" name="systolic_bp" placeholder="e.g., 120" required>
+                                    <span class="input-group-text">mmHg</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="diastolic_bp" class="form-label fw-bold">
+                                    <i class="bi bi-arrow-down-circle me-1"></i>
+                                    Diastolic (Lower Reading)
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-heart"></i>
+                                    </span>
+                                    <input type="number" step="0.1" class="form-control form-control-lg" 
+                                           id="diastolic_bp" name="diastolic_bp" placeholder="e.g., 80" required>
+                                    <span class="input-group-text">mmHg</span>
+                                </div>
+                            </div>
+                        </div>
+                        <small class="text-muted d-block mt-2">
+                            <i class="bi bi-info-circle me-1"></i>
+                            Normal BP: 120/80 mmHg or lower
+                        </small>
+                    </section>
+                    
+                    <!-- Lifestyle Metrics Section -->
+                    <section class="mb-4">
+                        <h5 class="mb-3 pb-2 border-bottom">
+                            <i class="bi bi-person-arms-up me-2 text-success"></i>
+                            Lifestyle & Wellness Metrics
+                        </h5>
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <label for="sleep_hours" class="form-label fw-bold">
+                                    <i class="bi bi-moon-stars me-1"></i>
+                                    Sleep Duration (Hours)
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-alarm"></i>
+                                    </span>
+                                    <input type="number" step="0.1" class="form-control form-control-lg" 
+                                           id="sleep_hours" name="sleep_hours" min="0" max="15" 
+                                           placeholder="e.g., 7.5" required>
+                                    <span class="input-group-text">hrs</span>
+                                </div>
+                                <small class="text-muted">Recommended: 7-9 hours</small>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="exercise_minutes" class="form-label fw-bold">
+                                    <i class="bi bi-bicycle me-1"></i>
+                                    Exercise Duration (Minutes)
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-stopwatch"></i>
+                                    </span>
+                                    <input type="number" class="form-control form-control-lg" 
+                                           id="exercise_minutes" name="exercise_minutes" min="0" 
+                                           placeholder="e.g., 30" required>
+                                    <span class="input-group-text">min</span>
+                                </div>
+                                <small class="text-muted">Target: 30+ minutes daily</small>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="stress_level" class="form-label fw-bold">
+                                    <i class="bi bi-emoji-neutral me-1"></i>
+                                    Stress Level (1-10)
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-thermometer-half"></i>
+                                    </span>
+                                    <input type="number" class="form-control form-control-lg" 
+                                           id="stress_level" name="stress_level" min="1" max="10" 
+                                           placeholder="1-10" required>
+                                </div>
+                                <small class="text-muted">1=Relaxed, 10=Very Stressed</small>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Action Buttons -->
+                    <div class="mt-5 pt-4 border-top d-flex gap-3 justify-content-center flex-wrap">
+                        <button type="submit" class="btn btn-success btn-lg px-5">
+                            <i class="bi bi-check-circle me-2"></i>
+                            Save Health Record
+                        </button>
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary btn-lg px-5">
+                            <i class="bi bi-arrow-left me-2"></i>
+                            Back to Dashboard
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Help Card -->
+        <div class="card dashboard-card mt-4">
+            <div class="card-body">
+                <h6 class="fw-bold mb-3">
+                    <i class="bi bi-question-circle me-2"></i>
+                    Need Help?
+                </h6>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <small class="text-muted">
+                            <i class="bi bi-shield-check text-success me-2"></i>
+                            Your health data is securely encrypted
+                        </small>
+                    </div>
+                    <div class="col-md-4">
+                        <small class="text-muted">
+                            <i class="bi bi-clock-history text-primary me-2"></i>
+                            Track your progress over time
+                        </small>
+                    </div>
+                    <div class="col-md-4">
+                        <small class="text-muted">
+                            <i class="bi bi-robot text-info me-2"></i>
+                            Get AI-powered health insights
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Bootstrap Form Validation
+    (function() {
+        'use strict';
+        const forms = document.querySelectorAll('.needs-validation');
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            });
+        });
+    })();
+</script>
+{% endblock %}
