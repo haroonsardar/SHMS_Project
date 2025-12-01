@@ -10,11 +10,11 @@ This project was built using the **Flask** micro-framework, making it a scalable
 
 | Module | Functional Requirements | Status |
 | :--- | :--- | :--- |
-| **1. User Authentication (R6)** | Secure Email-based Login/Signup/Logout. | Complete |
-| **2. Health Data Management (R1)** | CRUD operations (Create, View, Edit, Delete) for daily health records. | Complete |
-| **3. AI Risk Analysis (R3, R4)** | Displays real-time risk assessment (High/Medium/Low) based on data rules and integrated ML models (Diabetes/Heart Disease). | Complete |
-| **4. Data Visualization (R5)** | Interactive trend graphs (Daily/Weekly/Monthly) for key metrics (Weight, BP, Sugar). | Complete |
-| **5. Professional Reporting (R5.4)**| Generation of detailed PDF Health Reports (using ReportLab) summarizing risk and historical data. | Complete |
+| **1. User Authentication** | Secure Email-based Login/Signup/Logout. | Complete |
+| **2. Health Data Management** | CRUD operations (Create, View, Edit, Delete) for daily health records. | Complete |
+| **3. AI Risk Analysis** | Displays real-time risk assessment (High/Medium/Low) based on data rules and integrated ML models (Diabetes/Heart Disease). | Complete |
+| **4. Data Visualization** | Interactive trend graphs (Daily/Weekly/Monthly) for key metrics (Weight, BP, Sugar). | Complete |
+| **5. Professional Reporting**| Generation of detailed PDF Health Reports (using ReportLab) summarizing risk and historical data. | Complete |
 | **6. Expert UI/UX** | Professional, high-contrast, and minimalist user interface design. | Complete |
 
 ## 🛠️ Technology Stack
